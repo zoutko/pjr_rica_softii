@@ -1,14 +1,8 @@
 package co.edu.uptc.rica.ricaapi;
-import java.util.List;
-import java.util.Optional;
 
-public interface InvestigadorRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
 
-    List<Investigador> findAll();
-
-    Optional<Investigador> findById(Long id);
-
-    Investigador save(Investigador investigador);
+public interface InvestigadorRepository extends JpaRepository<Investigador, Long> {
 
     boolean existsByCorreoInstitucional(String correoInstitucional);
 
