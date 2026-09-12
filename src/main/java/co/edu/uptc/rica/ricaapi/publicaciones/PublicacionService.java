@@ -1,7 +1,10 @@
-package co.edu.uptc.rica.ricaapi;
+package co.edu.uptc.rica.ricaapi.publicaciones;
 
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
+
+import co.edu.uptc.rica.ricaapi.compartido.RecursoNoEncontradoException;
+import co.edu.uptc.rica.ricaapi.investigadores.InvestigadorRepository;
 
 import java.util.List;
 

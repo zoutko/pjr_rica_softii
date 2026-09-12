@@ -1,4 +1,4 @@
-package co.edu.uptc.rica.ricaapi;
+package co.edu.uptc.rica.ricaapi.investigadores;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
