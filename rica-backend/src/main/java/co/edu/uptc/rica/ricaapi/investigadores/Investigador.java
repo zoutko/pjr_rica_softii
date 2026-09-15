@@ -1,5 +1,6 @@
 package co.edu.uptc.rica.ricaapi.investigadores;
 
+import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
@@ -23,8 +24,8 @@ public class Investigador {
     @Column(name = "nombre_completo", nullable = false, length = 150)
     private String nombreCompleto;
 
-    @Embedded 
-    @Column(name = "correo_institucional", nullable = false, unique = true, length = 150)
+    @Embedded
+    @AttributeOverride(name = "valor", column = @Column(name = "correo_institucional", nullable = false, unique = true, length = 150))
     private CorreoInstitucional correoInstitucional;
 
     @Column(name = "grupo_investigacion", length = 150)
@@ -33,7 +34,8 @@ public class Investigador {
     public Investigador() {
     }
 
-    public Investigador(Long id, String nombreCompleto, CorreoInstitucional correoInstitucional, String grupoInvestigacion) {
+    public Investigador(Long id, String nombreCompleto, CorreoInstitucional correoInstitucional,
+            String grupoInvestigacion) {
         this.id = id;
         this.nombreCompleto = nombreCompleto;
         this.correoInstitucional = correoInstitucional;
