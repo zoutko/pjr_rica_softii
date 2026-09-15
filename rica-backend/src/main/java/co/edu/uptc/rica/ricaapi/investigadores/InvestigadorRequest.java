@@ -10,7 +10,7 @@ public class InvestigadorRequest {
 
     @NotBlank(message = "El correo institucional es obligatorio")
     @Email(message = "El correo institucional debe tener un formato válido")
-    private String correoInstitucional;
+    private CorreoInstitucional correoInstitucional;
 
     @NotBlank(message = "El grupo de investigación es obligatorio")
     private String grupoInvestigacion;
@@ -26,11 +26,11 @@ public class InvestigadorRequest {
         this.nombreCompleto = nombreCompleto;
     }
 
-    public String getCorreoInstitucional() {
+    public CorreoInstitucional getCorreoInstitucional() {
         return correoInstitucional;
     }
 
-    public void setCorreoInstitucional(String correoInstitucional) {
+    public void setCorreoInstitucional(CorreoInstitucional correoInstitucional) {
         this.correoInstitucional = correoInstitucional;
     }
 

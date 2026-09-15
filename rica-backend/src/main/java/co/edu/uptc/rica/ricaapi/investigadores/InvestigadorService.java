@@ -9,9 +9,11 @@ import java.util.List;
 @Service
 public class InvestigadorService {
 
+    private final InvestigadorFactory investigadorFactory;
     private final InvestigadorRepository investigadorRepository;
 
-    public InvestigadorService(InvestigadorRepository investigadorRepository) {
+    public InvestigadorService(InvestigadorFactory investigadorFactory, InvestigadorRepository investigadorRepository) {
+        this.investigadorFactory = investigadorFactory;
         this.investigadorRepository = investigadorRepository;
     }
 
@@ -25,12 +27,9 @@ public class InvestigadorService {
                         "No existe un investigador con id " + id));
     }
 
-    public Investigador registrar(Investigador investigador) {
-        if (investigadorRepository.existsByCorreoInstitucional(investigador.getCorreoInstitucional())) {
-            throw new CorreoDuplicadoException(
-                    "Ya existe un investigador registrado con el correo " + investigador.getCorreoInstitucional());
-        }
-        return investigadorRepository.save(investigador);
-    }
+public Investigador registrar(String nombreCompleto, String correoInstitucional, String grupoInvestigacion) {
+  Investigador investigador = investigadorFactory.crear(nombreCompleto, correoInstitucional, grupoInvestigacion);
+  return investigadorRepository.save(investigador);
+}
 
 }

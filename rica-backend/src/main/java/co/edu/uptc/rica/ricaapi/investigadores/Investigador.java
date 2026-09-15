@@ -1,6 +1,7 @@
 package co.edu.uptc.rica.ricaapi.investigadores;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -22,8 +23,9 @@ public class Investigador {
     @Column(name = "nombre_completo", nullable = false, length = 150)
     private String nombreCompleto;
 
+    @Embedded 
     @Column(name = "correo_institucional", nullable = false, unique = true, length = 150)
-    private String correoInstitucional;
+    private CorreoInstitucional correoInstitucional;
 
     @Column(name = "grupo_investigacion", length = 150)
     private String grupoInvestigacion;
@@ -31,7 +33,7 @@ public class Investigador {
     public Investigador() {
     }
 
-    public Investigador(Long id, String nombreCompleto, String correoInstitucional, String grupoInvestigacion) {
+    public Investigador(Long id, String nombreCompleto, CorreoInstitucional correoInstitucional, String grupoInvestigacion) {
         this.id = id;
         this.nombreCompleto = nombreCompleto;
         this.correoInstitucional = correoInstitucional;
