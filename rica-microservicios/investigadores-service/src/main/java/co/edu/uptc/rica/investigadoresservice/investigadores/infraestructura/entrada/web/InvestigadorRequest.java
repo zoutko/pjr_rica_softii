@@ -1,6 +1,5 @@
 package co.edu.uptc.rica.investigadoresservice.investigadores.infraestructura.entrada.web;
 
-import co.edu.uptc.rica.investigadoresservice.investigadores.dominio.CorreoInstitucional;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
@@ -11,7 +10,7 @@ public class InvestigadorRequest {
 
     @NotBlank(message = "El correo institucional es obligatorio")
     @Email(message = "El correo institucional debe tener un formato válido")
-    private CorreoInstitucional correoInstitucional;
+    private String correoInstitucional;
 
     @NotBlank(message = "El grupo de investigación es obligatorio")
     private String grupoInvestigacion;
@@ -27,11 +26,11 @@ public class InvestigadorRequest {
         this.nombreCompleto = nombreCompleto;
     }
 
-    public CorreoInstitucional getCorreoInstitucional() {
+    public String getCorreoInstitucional() {
         return correoInstitucional;
     }
 
-    public void setCorreoInstitucional(CorreoInstitucional correoInstitucional) {
+    public void setCorreoInstitucional(String correoInstitucional) {
         this.correoInstitucional = correoInstitucional;
     }
 
