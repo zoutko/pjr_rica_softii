@@ -2,7 +2,7 @@ package co.edu.uptc.rica.ricaapi.publicaciones;
 
 import org.springframework.stereotype.Service;
 
-import co.edu.uptc.rica.ricaapi.investigadores.CorreoInstitucional;
+import co.edu.uptc.rica.ricaapi.investigadores.dominio.CorreoInstitucional;
 
 
 @Service 

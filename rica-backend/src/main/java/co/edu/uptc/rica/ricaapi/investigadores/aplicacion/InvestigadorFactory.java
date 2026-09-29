@@ -1,18 +1,23 @@
-package co.edu.uptc.rica.ricaapi.investigadores;
+package co.edu.uptc.rica.ricaapi.investigadores.aplicacion;
 
 import java.time.Instant;
 
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Component;
 
+import co.edu.uptc.rica.ricaapi.investigadores.InvestigadorRegistrado;
+import co.edu.uptc.rica.ricaapi.investigadores.dominio.CorreoDuplicadoException;
+import co.edu.uptc.rica.ricaapi.investigadores.dominio.CorreoInstitucional;
+import co.edu.uptc.rica.ricaapi.investigadores.dominio.Investigador;
+
 @Component
 public class InvestigadorFactory {
 
-    private final InvestigadorRepository investigadorRepository;
+    private final RepositorioInvestigadores investigadorRepository;
     private final ApplicationEventPublisher eventPublisher;
 
     public InvestigadorFactory(
-            InvestigadorRepository investigadorRepository,
+            RepositorioInvestigadores investigadorRepository,
             ApplicationEventPublisher eventPublisher) {
 
         this.investigadorRepository = investigadorRepository;
@@ -25,7 +30,7 @@ public class InvestigadorFactory {
 
         CorreoInstitucional correo = new CorreoInstitucional(correoInstitucional);
 
-        if (investigadorRepository.existsByCorreoInstitucional(correo)) {
+        if (investigadorRepository.existeCorreo(correo.valor())) {
             throw new CorreoDuplicadoException(
                     "Ya existe un investigador registrado con el correo " + correo.valor());
         }

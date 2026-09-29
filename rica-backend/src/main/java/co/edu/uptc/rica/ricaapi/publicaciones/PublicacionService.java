@@ -4,8 +4,8 @@ import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 
 import co.edu.uptc.rica.ricaapi.compartido.RecursoNoEncontradoException;
-import co.edu.uptc.rica.ricaapi.investigadores.CorreoInstitucional;
-import co.edu.uptc.rica.ricaapi.investigadores.InvestigadorRepository;
+import co.edu.uptc.rica.ricaapi.investigadores.dominio.CorreoInstitucional;
+import co.edu.uptc.rica.ricaapi.investigadores.infraestructura.salida.persistencia.InvestigadorRepository;
 
 import java.util.List;
 
@@ -25,7 +25,7 @@ public class PublicacionService {
     }
 
     public Publicacion registrar(Publicacion publicacion) {
-        if (!investigadorRepository.existsByCorreoInstitucional( new CorreoInstitucional(publicacion.getInvestigadorCorreo()))) {
+        if (!investigadorRepository.existsByCorreoInstitucional_Valor(publicacion.getInvestigadorCorreo())) {
             throw new RecursoNoEncontradoException(
                     "No existe un investigador con correo " + publicacion.getInvestigadorCorreo());
         } else if (limitePublicacionesAnualesService.puedeRegistrar(

@@ -1,5 +1,6 @@
-package co.edu.uptc.rica.ricaapi.investigadores;
+package co.edu.uptc.rica.ricaapi.investigadores.infraestructura.entrada.web;
 
+import co.edu.uptc.rica.ricaapi.investigadores.dominio.CorreoInstitucional;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 

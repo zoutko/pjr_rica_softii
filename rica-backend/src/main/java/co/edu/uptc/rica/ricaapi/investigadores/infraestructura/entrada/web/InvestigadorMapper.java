@@ -1,4 +1,6 @@
-package co.edu.uptc.rica.ricaapi.investigadores;
+package co.edu.uptc.rica.ricaapi.investigadores.infraestructura.entrada.web;
+
+import co.edu.uptc.rica.ricaapi.investigadores.dominio.Investigador;
 
 public class InvestigadorMapper {
 

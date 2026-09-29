@@ -1,4 +1,4 @@
-package co.edu.uptc.rica.ricaapi.investigadores;
+package co.edu.uptc.rica.ricaapi.investigadores.infraestructura.entrada.web;
 
 public class InvestigadorResponse {
 
