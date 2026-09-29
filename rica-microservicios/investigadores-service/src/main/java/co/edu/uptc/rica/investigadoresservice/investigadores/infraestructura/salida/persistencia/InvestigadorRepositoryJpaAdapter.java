@@ -3,9 +3,12 @@ package co.edu.uptc.rica.investigadoresservice.investigadores.infraestructura.sa
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.stereotype.Repository;
+
 import co.edu.uptc.rica.investigadoresservice.investigadores.aplicacion.RepositorioInvestigadores;
 import co.edu.uptc.rica.investigadoresservice.investigadores.dominio.Investigador;
 
+@Repository 
 public class InvestigadorRepositoryJpaAdapter implements RepositorioInvestigadores {
 
     private final InvestigadorRepository investigadorRepository;
