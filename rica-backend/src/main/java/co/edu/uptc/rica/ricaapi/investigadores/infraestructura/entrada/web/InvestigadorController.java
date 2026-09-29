@@ -1,8 +1,11 @@
-package co.edu.uptc.rica.ricaapi.investigadores;
+package co.edu.uptc.rica.ricaapi.investigadores.infraestructura.entrada.web;
 
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import co.edu.uptc.rica.ricaapi.investigadores.aplicacion.InvestigadorUseCase;
+import co.edu.uptc.rica.ricaapi.investigadores.dominio.Investigador;
 
 import java.net.URI;
 import java.util.List;
@@ -11,9 +14,9 @@ import java.util.List;
 @RequestMapping("/api/investigadores")
 public class InvestigadorController {
 
-    private final InvestigadorService investigadorService;
+    private final InvestigadorUseCase investigadorService;
 
-    public InvestigadorController(InvestigadorService investigadorService) {
+    public InvestigadorController(InvestigadorUseCase investigadorService) {
         this.investigadorService = investigadorService;
     }
 
@@ -32,8 +35,7 @@ public class InvestigadorController {
 
     @PostMapping
     public ResponseEntity<InvestigadorResponse> registrar(@Valid @RequestBody InvestigadorRequest request) {
-        Investigador investigador = InvestigadorMapper.aEntidad(request);
-        Investigador guardado = investigadorService.registrar(investigador);
+        Investigador guardado = investigadorService.registrar(request.getNombreCompleto(), request.getCorreoInstitucional().valor(), request.getGrupoInvestigacion());
         InvestigadorResponse response = InvestigadorMapper.aResponse(guardado);
         return ResponseEntity
                 .created(URI.create("/api/investigadores/" + guardado.getId()))

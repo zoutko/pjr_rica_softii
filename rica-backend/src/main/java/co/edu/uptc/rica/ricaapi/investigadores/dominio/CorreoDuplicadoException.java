@@ -1,4 +1,4 @@
-package co.edu.uptc.rica.ricaapi.investigadores;
+package co.edu.uptc.rica.ricaapi.investigadores.dominio;
 
 public class CorreoDuplicadoException extends RuntimeException {
 
