@@ -9,10 +9,14 @@ Si pensamos como programadores sin conocimientos en DDD uno considera que es mej
 
 ## Puertos y adaptadores — Investigador
 
-1.InvestigadorRepository: puerto secundario (de salida).El núcleo inicia la llamada al repositorio para consultar o guardar investigadores; un adaptador de persistencia externo implementa ese puerto.
+1.InvestigadorRepository es una interfaz, nunca una clase concreta, desde el Tutorial 4. Según la guía (sección 3), ¿es un puerto primario o secundario? Justifica con una frase: ¿quién inicia la llamada, el núcleo o algo externo?
+InvestigadorRepository: puerto secundario (de salida).El núcleo inicia la llamada al repositorio para consultar o guardar investigadores; un adaptador de persistencia externo implementa ese puerto.
 
-2. InvestigadorController: adaptador primario (de entrada).Recibe solicitudes externas y las traduce a llamadas al servicio; envuelve Spring Web MVC para exponer una API REST sobre HTTP (@RestController y las anotaciones de rutas).
+2.InvestigadorController — ¿es un adaptador primario o secundario? ¿Qué tecnología concreta envuelve? 
+InvestigadorController: adaptador primario (de entrada).Recibe solicitudes externas y las traduce a llamadas al servicio; envuelve Spring Web MVC para exponer una API REST sobre HTTP (@RestController y las anotaciones de rutas).
 
-3. Pieza que falta para un puerto primario explícito: una interfaz que declare los casos de uso de investigadores (por ejemplo, un puerto de entrada con operaciones para listar, buscar y registrar). InvestigadorService podría implementarla y el controlador depender de esa interfaz en lugar de la clase concreta.
+3.InvestigadorService hoy es una clase concreta, no una interfaz. InvestigadorController la llama directamente. Según la nota de la guía (sección 6, "Lo que sí falta hoy en rica-api"), ¿qué pieza falta para que exista un puerto primario explícito?
+ Pieza que falta para un puerto primario explícito: una interfaz que declare los casos de uso de investigadores (por ejemplo, un puerto de entrada con operaciones para listar, buscar y registrar). InvestigadorService podría implementarla y el controlador depender de esa interfaz en lugar de la clase concreta.
 
-4. InvestigadorFactory: no pertenece al núcleo limpio tal como está; queda del lado del adaptador/borde de infraestructura. Sus imports de org.springframework.stereotype.Component y org.springframework.context.ApplicationEventPublisher acoplan la fábrica a Spring y a la publicación de eventos del framework, dependencias que el núcleo debería evitar.
+4.InvestigadorFactory del Taller de la Lección 3 — ¿pertenece al núcleo o a un adaptador? Pista: revisa sus import (sección 5 de la guía, "La prueba del núcleo limpio"). 
+InvestigadorFactory: no pertenece al núcleo limpio tal como está; queda del lado del adaptador/borde de infraestructura. Sus imports de org.springframework.stereotype.Component y org.springframework.context.ApplicationEventPublisher acoplan la fábrica a Spring y a la publicación de eventos del framework, dependencias que el núcleo debería evitar.
