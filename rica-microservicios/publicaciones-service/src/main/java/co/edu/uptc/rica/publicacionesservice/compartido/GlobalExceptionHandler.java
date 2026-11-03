@@ -6,6 +6,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import co.edu.uptc.rica.publicacionesservice.publicaciones.ServicioNoDisponibleException;
 
 import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
@@ -38,6 +39,11 @@ public class GlobalExceptionHandler {
         return ResponseEntity.badRequest().body(cuerpo);
     }
 
+    @ExceptionHandler (ServicioNoDisponibleException.class)
+    public ResponseEntity<Map<String, Object>> manejarServicioNoDisponible(ServicioNoDisponibleException ex) {
+        return construirRespuesta(HttpStatus.SERVICE_UNAVAILABLE, ex.getMessage());
+    }
+
     private ResponseEntity<Map<String, Object>> construirRespuesta(HttpStatus estado, String mensaje) {
         Map<String, Object> cuerpo = new LinkedHashMap<>();
         cuerpo.put("timestamp", LocalDateTime.now());
@@ -45,5 +51,7 @@ public class GlobalExceptionHandler {
         cuerpo.put("mensaje", mensaje);
         return ResponseEntity.status(estado).body(cuerpo);
     }
+
+
 
 }

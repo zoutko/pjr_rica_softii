@@ -1,4 +1,4 @@
-package co.edu.uptc.rica.publicaciones_service;
+package co.edu.uptc.rica.publicacionesservice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

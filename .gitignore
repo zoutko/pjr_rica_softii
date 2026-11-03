@@ -1,0 +1,17 @@
+# Maven / Java build artifacts
+**/target/
+**/generated-sources/
+**/generated-test-sources/
+**/protobuf-maven-plugin/
+**/bin/
+**/out/
+
+# IDE files
+**/.idea/
+**/.vscode/
+**/.classpath
+**/.project
+**/.settings/
+
+# Common Java compiled output
+*.class
