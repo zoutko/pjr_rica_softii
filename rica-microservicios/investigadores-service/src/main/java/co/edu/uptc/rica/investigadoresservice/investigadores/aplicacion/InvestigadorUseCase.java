@@ -6,9 +6,13 @@ import co.edu.uptc.rica.investigadoresservice.investigadores.dominio.Investigado
 
 public interface InvestigadorUseCase {
 
-    List<Investigador> listarTodos();
+  List<Investigador> listarTodos();
 
   Investigador buscarPorId(Long id);
 
   Investigador registrar(String nombreCompleto, String correoInstitucional, String grupoInvestigacion);
+
+  void iniciarEliminacion(Long id);
+
+  void confirmarEliminacion(String correoInstitucional);
 }

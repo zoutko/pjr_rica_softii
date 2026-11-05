@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import co.edu.uptc.rica.investigadoresservice.investigadores.aplicacion.RepositorioInvestigadores;
 import co.edu.uptc.rica.investigadoresservice.investigadores.dominio.Investigador;
 
-@Repository 
+@Repository
 public class InvestigadorRepositoryJpaAdapter implements RepositorioInvestigadores {
 
     private final InvestigadorRepository investigadorRepository;
@@ -35,6 +35,16 @@ public class InvestigadorRepositoryJpaAdapter implements RepositorioInvestigador
     @Override
     public Investigador guardar(Investigador investigador) {
         return investigadorRepository.save(investigador);
+    }
+
+    @Override
+    public Optional<Investigador> buscarPorCorreo(String correoInstitucional) {
+        return investigadorRepository.findByCorreoInstitucional_Valor(correoInstitucional);
+    }
+
+    @Override
+    public void eliminar(Investigador investigador) {
+        investigadorRepository.delete(investigador);
     }
 
 }

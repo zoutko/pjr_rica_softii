@@ -9,12 +9,12 @@ import org.springframework.data.annotation.Id;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter 
-@Setter 
-@Document(collection = "publicaciones") 
+@Getter
+@Setter
+@Document(collection = "publicaciones")
 public class Publicacion {
 
-    @Id 
+    @Id
     private String id;
 
     private String investigadorCorreo,
@@ -22,9 +22,16 @@ public class Publicacion {
             tipo;
     private Integer anio;
     private Map<String, String> detalles;
+    private boolean huerfana;
 
     public Publicacion() {
     }
 
+    public boolean isHuerfana() {
+        return huerfana;
+    }
 
+    public void marcarComoHuerfana() {
+        this.huerfana = true;
+    }
 }

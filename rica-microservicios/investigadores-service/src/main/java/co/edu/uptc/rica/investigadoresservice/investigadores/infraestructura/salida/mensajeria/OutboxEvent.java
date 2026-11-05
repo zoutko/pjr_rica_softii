@@ -1,5 +1,7 @@
 package co.edu.uptc.rica.investigadoresservice.investigadores.infraestructura.salida.mensajeria;
 
+import java.time.Instant;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -27,7 +29,7 @@ public class OutboxEvent {
     private String payload;
 
     @Column(name = "creado_en", nullable = false)
-    private Long creadoEn;
+    private Instant creadoEn;
 
     @Column(nullable = false)
     private boolean publicado;
@@ -35,7 +37,7 @@ public class OutboxEvent {
     public OutboxEvent() {
     }
 
-    public OutboxEvent(String topico, String clave, String payload, Long creadoEn, boolean publicado) {
+    public OutboxEvent(String topico, String clave, String payload, Instant creadoEn, boolean publicado) {
         this.topico = topico;
         this.clave = clave;
         this.payload = payload;

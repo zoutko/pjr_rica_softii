@@ -1,5 +1,6 @@
 package co.edu.uptc.rica.investigadoresservice.investigadores.infraestructura.salida.mensajeria;
 
+import java.time.Instant;
 import java.util.Map;
 
 import org.springframework.stereotype.Component;
@@ -23,7 +24,7 @@ public class OutboxPublicadorEventos implements PublicadorEventos {
     public void publicar(String topico, String clave, Map<String, Object> contenido) {
         try {
             String payload = objectMapper.writeValueAsString(contenido);
-            OutboxEvent evento = new OutboxEvent(topico, clave, payload, System.currentTimeMillis(), false);
+            OutboxEvent evento = new OutboxEvent(topico, clave, payload, Instant.now(), false);
             repositorio.save(evento);
         } catch (Exception e) {
             throw new RuntimeException("Error al serializar el contenido del evento", e);
