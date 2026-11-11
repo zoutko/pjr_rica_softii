@@ -74,7 +74,14 @@ public class InvestigadorService implements InvestigadorUseCase {
     public void confirmarEliminacion(String correoInstitucional) {
         investigadorRepository.buscarPorCorreo(correoInstitucional)
                 .filter(Investigador::estaEnEliminacion)
-                .ifPresent(investigadorRepository::eliminar);
+                .ifPresent(investigador -> {
+                    investigadorRepository.eliminar(investigador);
+                    // Los consumidores (p. ej. consultas-service) se enteran de que ya no existe.
+                    publicadorEventos.publicar(
+                            "investigadores.eliminados",
+                            correoInstitucional,
+                            Map.of("correoInstitucional", correoInstitucional));
+                });
     }
 
 }
