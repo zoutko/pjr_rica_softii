@@ -1,8 +1,5 @@
 package co.edu.uptc.rica.ricaapi.publicaciones;
 
-/**
- * PublicacionMapper
- */
 public class PublicacionMapper {
 
     public static Publicacion aEntidad(PublicacionRequest request) {
