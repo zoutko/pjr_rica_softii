@@ -16,7 +16,7 @@ jobs:
         servicio: [eurekaserver, gateway, investigadores-service, publicaciones-service, consultas-service]
     defaults:
       run:
-        working-directory: ${{ matrix.servicio }}
+        working-directory: rica-microservicios/${{ matrix.servicio }}
     steps:
       - name: Descargar el código
         uses: actions/checkout@v5
@@ -31,4 +31,4 @@ jobs:
       # Se excluyen las pruebas de arranque completo (*ApplicationTests): necesitan
       # Kafka, PostgreSQL o MongoDB corriendo. Las pruebas unitarias sí se ejecutan.
       - name: Ejecutar pruebas
-        run: sh ./mvnw -B -ntp test -Dtest='!*ApplicationTests' -Dsurefire.failIfNoSpecifiedTests=false
+        run: mvn -B -ntp test -Dtest='!*ApplicationTests' -Dsurefire.failIfNoSpecifiedTests=false
