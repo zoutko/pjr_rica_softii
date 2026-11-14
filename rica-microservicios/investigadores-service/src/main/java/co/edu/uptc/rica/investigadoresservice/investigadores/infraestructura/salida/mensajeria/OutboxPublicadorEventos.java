@@ -1,19 +1,24 @@
 package co.edu.uptc.rica.investigadoresservice.investigadores.infraestructura.salida.mensajeria;
 
+import co.edu.uptc.rica.investigadoresservice.investigadores.aplicacion.PublicadorEventos;
+import org.slf4j.MDC;
+import org.springframework.stereotype.Component;
+import tools.jackson.databind.ObjectMapper;
+
 import java.time.Instant;
+import java.util.HashMap;
 import java.util.Map;
 
-import org.springframework.stereotype.Component;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import co.edu.uptc.rica.investigadoresservice.investigadores.aplicacion.PublicadorEventos;
-
-@Component 
+/**
+ * Adaptador: en vez de hablar con Kafka, escribe el evento en la tabla outbox.
+ * Se ejecuta dentro de la misma transacción que guarda al investigador, así
+ * ambos cambios se confirman juntos o ninguno se confirma.
+ */
+@Component
 public class OutboxPublicadorEventos implements PublicadorEventos {
 
     private final OutboxEventRepository repositorio;
-    public final ObjectMapper objectMapper;
+    private final ObjectMapper objectMapper;
 
     public OutboxPublicadorEventos(OutboxEventRepository repositorio, ObjectMapper objectMapper) {
         this.repositorio = repositorio;
@@ -22,13 +27,14 @@ public class OutboxPublicadorEventos implements PublicadorEventos {
 
     @Override
     public void publicar(String topico, String clave, Map<String, Object> contenido) {
-        try {
-            String payload = objectMapper.writeValueAsString(contenido);
-            OutboxEvent evento = new OutboxEvent(topico, clave, payload, Instant.now(), false);
-            repositorio.save(evento);
-        } catch (Exception e) {
-            throw new RuntimeException("Error al serializar el contenido del evento", e);
+        // El id de correlación viaja dentro del evento: así la traza cruza servicios y Kafka
+        Map<String, Object> conTraza = new HashMap<>(contenido);
+        String correlationId = MDC.get("correlationId");
+        if (correlationId != null) {
+            conTraza.put("correlationId", correlationId);
         }
+        String payload = objectMapper.writeValueAsString(conTraza);
+        repositorio.save(new OutboxEvent(topico, clave, payload, Instant.now(), false));
     }
 
 }
