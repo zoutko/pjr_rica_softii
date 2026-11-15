@@ -1,6 +1,5 @@
 package co.edu.uptc.rica.investigadoresservice.investigadores;
 
-import java.time.Instant;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
